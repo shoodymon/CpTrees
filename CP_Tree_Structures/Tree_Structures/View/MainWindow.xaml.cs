@@ -24,5 +24,30 @@ namespace Tree_Structures
         {
             InitializeComponent();
         }
+
+        private void ExitBtn_Click(object sender, RoutedEventArgs e)
+        {
+            Close();
+        }
+
+        private void TreeSelectionButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void SettingsButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void TutorialsButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void AuthorButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

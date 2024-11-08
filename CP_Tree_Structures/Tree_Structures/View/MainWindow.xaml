@@ -8,8 +8,345 @@
         mc:Ignorable="d"
         Title="Tree Data Structures"
         Style="{StaticResource MainWindowStyle}"
-        WindowStartupLocation="CenterScreen">
+        WindowStartupLocation="CenterScreen"
+        WindowStyle="None" ResizeMode="NoResize"
+        AllowsTransparency="True"
+        Background="Transparent">
     <Grid>
-        
+
+        <!--// Background //-->
+
+        <Border Background="#1C1D31"
+                CornerRadius="25" />
+
+        <!--// Main Grid //-->
+
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="280" />
+                <ColumnDefinition Width="280" />
+                <ColumnDefinition Width="280" />
+                <ColumnDefinition Width="280" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="140" />
+                <RowDefinition Height="360" />
+                <RowDefinition Height="170" />
+                <RowDefinition Height="70" />
+            </Grid.RowDefinitions>
+
+            <!--// Panel 1 //-->
+
+            <Button x:Name="TreeSelectionButton"
+                    Grid.Row="1"
+                    Grid.Column="1"
+                    Margin="20"
+                    Background="Transparent"
+                    BorderBrush="Transparent"
+                    HorizontalAlignment="Stretch"
+                    VerticalAlignment="Stretch"
+                    Click="TreeSelectionButton_Click">
+
+                <Button.Template>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="BorderElement"
+                                CornerRadius="25">
+                            <Border.Background>
+                                <!-- Градиентная заливка -->
+                                <LinearGradientBrush StartPoint="0.75,0" EndPoint="0,1">
+                                    <GradientStop Color="#DF208F" Offset="0.1"/>
+                                    <GradientStop Color="#DFCF20" Offset="0.8"/>
+                                </LinearGradientBrush>
+                            </Border.Background>
+                            <Grid>
+                                <Border Background="#FFFFFF"
+                                        Height="200"
+                                        Width="180"
+                                        HorizontalAlignment="Left"
+                                        VerticalAlignment="Top"
+                                        CornerRadius="20"
+                                        Opacity="0.3"
+                                        Margin="10,10,0,0" />
+
+                                <TextBlock Text="&#x0a;ДЕРЕВЬЯ &#x0a;"
+                                           Foreground="#FFFFFF"
+                                           FontFamily="Oswald"
+                                           FontSize="32"
+                                           VerticalAlignment="Top"
+                                           HorizontalAlignment="Left"
+                                           Margin="30,20,0,0" />
+                            </Grid>
+                        </Border>
+
+                        <!-- VisualStateManager для обработки состояний -->
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="Button.IsMouseOver" Value="True">
+                                <Setter TargetName="BorderElement" Property="Background" Value="#4A4B6D" />
+                                <Setter TargetName="BorderElement" Property="Opacity" Value="0.6" />
+                            </Trigger>
+                            <Trigger Property="Button.IsPressed" Value="True">
+                                <Setter TargetName="BorderElement" Property="Background" Value="#33344D" />
+                                <Setter TargetName="BorderElement" Property="Opacity" Value="0.8" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Button.Template>
+            </Button>
+
+            <!--// Panel 2 //-->
+
+            <Button x:Name="SettingsButton"
+                    Grid.Row="1"
+                    Grid.Column="2"
+                    Margin="20"
+                    Background="Transparent"
+                    BorderBrush="Transparent"
+                    HorizontalAlignment="Stretch"
+                    VerticalAlignment="Stretch"
+                    Click="SettingsButton_Click">
+
+                <Button.Template>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="BorderElement"
+                    CornerRadius="25">
+                            <Border.Background>
+                                <!-- Градиентная заливка -->
+                                <LinearGradientBrush StartPoint="0.75,0" EndPoint="0,1">
+                                    <GradientStop Color="#27BDE9" Offset="0.1"/>
+                                    <GradientStop Color="#ABDB54" Offset="0.8"/>
+                                </LinearGradientBrush>
+                            </Border.Background>
+                            <Grid>
+                                <Border Background="#FFFFFF"
+                                        Height="200"
+                                        Width="200"
+                                        HorizontalAlignment="Left"
+                                        VerticalAlignment="Top"
+                                        CornerRadius="20"
+                                        Opacity="0.3"
+                                        Margin="10,10,0,0" />
+
+                                <TextBlock Text="&#x0a;НАСТРОЙКИ &#x0a;"
+                                           Foreground="#FFFFFF"
+                                           FontFamily="Oswald"
+                                           FontSize="32"
+                                           VerticalAlignment="Top"
+                                           HorizontalAlignment="Left"
+                                           Margin="15,20,0,0" />    
+                            </Grid>
+                        </Border>
+
+                        <!-- VisualStateManager для обработки состояний -->
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="Button.IsMouseOver" Value="True">
+                                <Setter TargetName="BorderElement" Property="Background" Value="#4A4B6D" />
+                                <Setter TargetName="BorderElement" Property="Opacity" Value="0.6" />
+                            </Trigger>
+                            <Trigger Property="Button.IsPressed" Value="True">
+                                <Setter TargetName="BorderElement" Property="Background" Value="#33344D" />
+                                <Setter TargetName="BorderElement" Property="Opacity" Value="0.8" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Button.Template>
+            </Button>
+
+            <!--// Panel 3 //-->
+
+            <Button x:Name="TutorialsButton"
+                    Grid.Row="1"
+                    Grid.Column="3"
+                    Margin="20"
+                    Background="Transparent"
+                    BorderBrush="Transparent"
+                    HorizontalAlignment="Stretch"
+                    VerticalAlignment="Stretch"
+                    Click="TutorialsButton_Click">
+
+                <Button.Template>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="BorderElement"
+                    CornerRadius="25">
+                            <Border.Background>
+                                <!-- Градиентная заливка -->
+                                <LinearGradientBrush StartPoint="0.75,0" EndPoint="0,1">
+                                    <GradientStop Color="#F96100" Offset="0.1"/>
+                                    <GradientStop Color="#E70B75" Offset="0.8"/>
+                                </LinearGradientBrush>
+                            </Border.Background>
+                            <Grid>
+                                <Border Background="#FFFFFF"
+                                        Height="200"
+                                        Width="180"
+                                        HorizontalAlignment="Left"
+                                        VerticalAlignment="Top"
+                                        CornerRadius="20"
+                                        Opacity="0.3"
+                                        Margin="10,10,0,0" />
+
+                                <TextBlock Text="&#x0a;ТУТОРЫ &#x0a;"
+                                           Foreground="#FFFFFF"
+                                           FontFamily="Oswald"
+                                           FontSize="32"
+                                           VerticalAlignment="Top"
+                                           HorizontalAlignment="Left"
+                                           Margin="30,20,0,0" />
+                            </Grid>
+                        </Border>
+
+                        <!-- VisualStateManager для обработки состояний -->
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="Button.IsMouseOver" Value="True">
+                                <Setter TargetName="BorderElement" Property="Background" Value="#4A4B6D" />
+                                <Setter TargetName="BorderElement" Property="Opacity" Value="0.6" />
+                            </Trigger>
+                            <Trigger Property="Button.IsPressed" Value="True">
+                                <Setter TargetName="BorderElement" Property="Background" Value="#33344D" />
+                                <Setter TargetName="BorderElement" Property="Opacity" Value="0.8" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Button.Template>
+            </Button>
+
+            <!--// Panel 4 //-->
+
+            <Button x:Name="AuthorButton"
+                    Grid.Row="1"
+                    Grid.Column="4"
+                    Margin="20"
+                    Background="Transparent"
+                    BorderBrush="Transparent"
+                    HorizontalAlignment="Stretch"
+                    VerticalAlignment="Stretch"
+                    Click="AuthorButton_Click">
+
+                <Button.Template>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="BorderElement"
+                                CornerRadius="25">
+                            <Border.Background>
+                                <!-- Градиентная заливка -->
+                                <LinearGradientBrush StartPoint="0.75,0" EndPoint="0,1">
+                                    <GradientStop Color="#06A4FB" Offset="0.1"/>
+                                    <GradientStop Color="#B84EEB" Offset="0.8"/>
+                                </LinearGradientBrush>
+                            </Border.Background>
+                            <Grid>
+                                <Border Background="#FFFFFF"
+                                        Height="200"
+                                        Width="180"
+                                        HorizontalAlignment="Left"
+                                        VerticalAlignment="Top"
+                                        CornerRadius="20"
+                                        Opacity="0.3"
+                                        Margin="10,10,0,0" />
+
+                                <TextBlock Text="&#x0a;ОБ АВТОРЕ&#x0a;"
+                                           Foreground="#FFFFFF"
+                                           FontFamily="Oswald"
+                                           FontSize="32"
+                                           VerticalAlignment="Top"
+                                           HorizontalAlignment="Left"
+                                           Margin="20,20,0,0" />
+                            </Grid>
+                        </Border>
+
+                        <!-- VisualStateManager для обработки состояний -->
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="Button.IsMouseOver" Value="True">
+                                <Setter TargetName="BorderElement" Property="Background" Value="#4A4B6D" />
+                                <Setter TargetName="BorderElement" Property="Opacity" Value="0.6" />
+                            </Trigger>
+                            <Trigger Property="Button.IsPressed" Value="True">
+                                <Setter TargetName="BorderElement" Property="Background" Value="#33344D" />
+                                <Setter TargetName="BorderElement" Property="Opacity" Value="0.8" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Button.Template>
+            </Button>
+
+
+            <!--// Header //-->
+
+            <TextBlock Grid.Row="0"
+                       Grid.Column="1"
+                       Grid.ColumnSpan="2"
+                       Text="Древовидные структуры данных"
+                       Foreground="#CDD7E0"
+                       FontFamily="Oswald"
+                       FontSize="36"
+                       Margin="20,50,0,0" />
+
+            <TextBlock Grid.Row="0"
+                       Grid.Column="1"
+                       Grid.ColumnSpan="2"
+                       Text="К У Р С О В А Я    Р А Б О Т А"
+                       Foreground="#A6B8C8"
+                       FontFamily="Roboto"
+                       FontSize="18"
+                       HorizontalAlignment="Right"
+                       VerticalAlignment="Bottom"
+                       Margin="0,0,238,23" />
+
+            <!--// Footer //-->
+
+            <Border Grid.Row="3"
+                    Grid.ColumnSpan="6"
+                    CornerRadius="0,0,20,20">
+
+                <TextBlock Text="LICENSE @shoodymon" FontSize="30" 
+                           FontFamily="Cascadia Mono" FontWeight="Bold" 
+                           VerticalAlignment="Center" HorizontalAlignment="Right"
+                           Margin="0,0,30,0"/>
+                <Border.Background>
+
+                    <LinearGradientBrush StartPoint="0.75,0"
+                                         EndPoint="0,1">
+
+                        <GradientStop Color="#DF208F"
+                                      Offset="0.1" />
+
+                        <GradientStop Color="#DFCF20"
+                                      Offset="0.8" />
+
+                    </LinearGradientBrush>
+
+                </Border.Background>
+
+            </Border>
+
+            <!--// Dock Bar //-->
+
+            <Grid Grid.Row="2"
+                  Grid.Column="1"
+                  Grid.ColumnSpan="4">
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="740" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <Border Grid.Column="1"
+                        Background="#323345"
+                        CornerRadius="10,10,0,0"
+                        Margin="0,85,0,0">
+                </Border>
+
+            </Grid>
+
+        </Grid>
+
+        <!--// Exit Button //-->
+
+        <Button x:Name="ExitBtn"
+                Style="{StaticResource CloseBtnStyle}"
+                Click="ExitBtn_Click" />
+
     </Grid>
 </Window>

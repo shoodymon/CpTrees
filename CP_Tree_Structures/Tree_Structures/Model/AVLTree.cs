@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Tree_Structures.Model
 {
-    internal class AVLTree
+    internal class AVLTree : ITree
     {
     }
 }
