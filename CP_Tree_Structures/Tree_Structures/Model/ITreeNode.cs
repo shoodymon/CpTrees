@@ -6,7 +6,10 @@ using System.Threading.Tasks;
 
 namespace Tree_Structures.Model
 {
-    internal class TwoThreeFourTree
+    public interface ITreeNode
     {
+        int Value { get; set; }
+        ITreeNode Left { get; set; }
+        ITreeNode Right { get; set; }
     }
 }

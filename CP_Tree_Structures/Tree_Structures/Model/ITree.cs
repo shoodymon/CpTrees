@@ -6,7 +6,11 @@ using System.Threading.Tasks;
 
 namespace Tree_Structures.Model
 {
-    internal interface ITree
+    public interface ITree
     {
+        ITreeNode root { get; } // Корень дерева, нужен для доступа к узлам
+        void Insert(int value);
+        void Delete(int value);
+        bool Search(int value);
     }
 }

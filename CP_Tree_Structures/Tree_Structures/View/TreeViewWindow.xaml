@@ -23,9 +23,8 @@
                     <ColumnDefinition Width="300" />
                 </Grid.ColumnDefinitions>
 
-                <!-- Область для отображения дерева -->
-                <Border Background="Cornsilk" CornerRadius="25" Margin="20,30,10,20" BorderThickness="2" BorderBrush="#FFFF0900">
-                    <Canvas x:Name="TreeCanvas" Grid.Column="0" Background="Transparent"/>
+                <Border Background="{DynamicResource CanvasBackgroundBrush}" CornerRadius="25" Margin="20,30,10,20" BorderThickness="2" BorderBrush="#FFFF0900">
+                    <Canvas x:Name="TreeCanvas" Background="Transparent"/>
                 </Border>
 
                 <!-- Панель управления деревом -->

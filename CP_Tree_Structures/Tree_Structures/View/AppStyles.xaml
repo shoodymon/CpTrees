@@ -362,4 +362,20 @@
         <Setter Property="ItemContainerStyle" Value="{StaticResource GradientComboBoxItemStyle}"/>
     </Style>
 
+    <!-- Цвета для различных типов деревьев -->
+    <SolidColorBrush x:Key="BSTNodeColorBrush" Color="#FF05F705" />
+    <SolidColorBrush x:Key="AVLNodeColorBrush" Color="#FF1F9EFF" />
+    <SolidColorBrush x:Key="RBNodeRedColorBrush" Color="#FFFF2D2D" />
+    <SolidColorBrush x:Key="RBNodeBlackColorBrush" Color="#FF5E5C5C" />
+
+    <!-- Цвет фона для холста -->
+    <SolidColorBrush x:Key="CanvasBackgroundBrush" Color="Cornsilk" />
+
+    <!-- Цвета для стрелок и обводок -->
+    <SolidColorBrush x:Key="EllipseColorBrush" Color="Black" />
+    <SolidColorBrush x:Key="ArrowColorBrush" Color="#1c1c1c" />
+
+    <!-- Цвет числа в узле -->
+    <SolidColorBrush x:Key="NodeTextColorBrush" Color="#1c1c1c"/>
+
 </ResourceDictionary>

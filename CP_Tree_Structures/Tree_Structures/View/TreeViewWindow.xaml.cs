@@ -22,6 +22,7 @@ namespace Tree_Structures.View
     {
         private ITree currentTree;
         private Dictionary<string, ITree> trees;
+        private TreeDrawer treeDrawer;
         public TreeViewWindow()
         {
             InitializeComponent();
@@ -30,11 +31,23 @@ namespace Tree_Structures.View
                 { "Бинарное дерево поиска", new BinarySearchTree() },
                 { "АВЛ-дерево", new AVLTree() },
                 { "КЧ-дерево", new RedBlackTree() },
-                { "B-дерево", new BTree() },
-                { "B+ дерево", new BPlusTree() },
-                { "2-3-4 дерево", new TwoThreeFourTree() },
+                //{ "B-дерево", new BTree() },
+                //{ "B+ дерево", new BPlusTree() },
+                //{ "2-3-4 дерево", new TwoThreeFourTree() },
             };
+
             currentTree = trees["Бинарное дерево поиска"];
+            treeDrawer = new TreeDrawer();
+
+            //TreeCanvas.Background = (Brush)Application.Current.Resources["CanvasBackgroundBrush"];
+
+            // Привязка обработчиков событий
+            AddNodeButton.Click += AddNodeButton_Click;
+            DeleteNodeButton.Click += DeleteNodeButton_Click;
+            SearchNodeButton.Click += SearchNodeButton_Click;
+            BackButton.Click += (s, e) => Close();
+
+            // Заполнение ComboBox
             foreach (var treeType in trees.Keys)
             {
                 TreeTypeComboBox.Items.Add(treeType);
@@ -44,40 +57,119 @@ namespace Tree_Structures.View
 
         private void AddNodeButton_Click(object sender, RoutedEventArgs e)
         {
-            //int value = int.Parse(ValueTextBox.Text);
-            //currentTree.Insert(value);
-            //RedrawTree();
+            if (int.TryParse(ValueTextBox.Text, out int value))
+            {
+                try
+                {
+                    currentTree.Insert(value);
+                    treeDrawer.SetHighlightedNode(null); // Сбрасываем подсветку
+                    RedrawTree();
+                    ValueTextBox.Clear();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Ошибка при добавлении узла: {ex.Message}");
+                }
+            }
+            else
+            {
+                MessageBox.Show("Пожалуйста, введите корректное числовое значение");
+            }
         }
 
         private void DeleteNodeButton_Click(object sender, RoutedEventArgs e)
         {
-            //int value = int.Parse(ValueTextBox.Text);
-            //currentTree.Delete(value);
-            //RedrawTree();
+            if (int.TryParse(ValueTextBox.Text, out int value))
+            {
+                try
+                {
+                    currentTree.Delete(value);
+                    treeDrawer.SetHighlightedNode(null); // Сбрасываем подсветку
+                    RedrawTree();
+                    ValueTextBox.Clear();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Ошибка при удалении узла: {ex.Message}");
+                }
+            }
+            else
+            {
+                MessageBox.Show("Пожалуйста, введите корректное числовое значение");
+            }
         }
 
         private void SearchNodeButton_Click(object sender, RoutedEventArgs e)
         {
-            //int value = int.Parse(ValueTextBox.Text);
-            //var node = currentTree.Find(value);
-            //// Визуализация найденного узла на полотне
+            if (int.TryParse(ValueTextBox.Text, out int value))
+            {
+                try
+                {
+                    bool found = currentTree.Search(value);
+                    if (found)
+                    {
+                        // Устанавливаем подсветку найденного узла
+                        treeDrawer.SetHighlightedNode(value);
+                        RedrawTree();
+                        MessageBox.Show($"Значение {value} найдено в дереве");
+                    }
+                    else
+                    {
+                        // Сбрасываем подсветку если узел не найден
+                        treeDrawer.SetHighlightedNode(null);
+                        RedrawTree();
+                        MessageBox.Show($"Значение {value} не найдено в дереве");
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Ошибка при поиске узла: {ex.Message}");
+                }
+            }
+            else
+            {
+                MessageBox.Show("Пожалуйста, введите корректное числовое значение");
+            }
         }
 
         private void RedrawTree()
         {
-            //// Очистить полотно и перерисовать дерево
-            //TreeCanvas.Children.Clear();
-            //TreeDrawer.DrawTree(currentTree, TreeCanvas);
+            if (treeDrawer == null)
+            {
+                treeDrawer = new TreeDrawer();
+            }
+            // Очистка холста перед отрисовкой
+            TreeCanvas.Children.Clear();
+            // Визуализация текущего дерева
+            treeDrawer.DrawTree(currentTree, TreeCanvas);
+
+            // Применяем цвета для разных типов деревьев
+            if (currentTree is BinarySearchTree)
+            {
+                treeDrawer.NodeColor = (Brush)Application.Current.Resources["BSTNodeColorBrush"];
+            }
+            else if (currentTree is AVLTree)
+            {
+                treeDrawer.NodeColor = (Brush)Application.Current.Resources["AVLNodeColorBrush"];
+            }
+            else if (currentTree is RedBlackTree)
+            {
+                treeDrawer.NodeColor = (Brush)Application.Current.Resources["RBNodeRedColorBrush"];
+            }
+
+            // Применяем цвета для других элементов, например, стрелок и обводок
+            treeDrawer.EllipseColor = (Brush)Application.Current.Resources["EllipseColorBrush"];
+            treeDrawer.ArrowColor = (Brush)Application.Current.Resources["ArrowColorBrush"];
         }
 
         private void TreeTypeComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             string selectedTreeType = TreeTypeComboBox.SelectedItem as string;
-
-            // Обновляем текущее дерево, если выбор валиден
             if (selectedTreeType != null && trees.ContainsKey(selectedTreeType))
             {
                 currentTree = trees[selectedTreeType];
+                treeDrawer.SetHighlightedNode(null); // Сбрасываем подсветку при смене типа дерева
+                RedrawTree();
             }
         }
     }
