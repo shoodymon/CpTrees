@@ -23,6 +23,7 @@ namespace Tree_Structures.View
         private ITree currentTree;
         private Dictionary<string, ITree> trees;
         private TreeDrawer treeDrawer;
+        private BTreeDrawer bTreeDrawer;
         public TreeViewWindow()
         {
             InitializeComponent();
@@ -31,13 +32,16 @@ namespace Tree_Structures.View
                 { "Бинарное дерево поиска", new BinarySearchTree() },
                 { "АВЛ-дерево", new AVLTree() },
                 { "КЧ-дерево", new RedBlackTree() },
-                //{ "B-дерево", new BTree() },
+                { "Двоичная куча (min)", new MinHeap() },
+                { "Двоичная куча (max)", new MaxHeap() },
+                { "B-дерево", new BTree() },
                 //{ "B+ дерево", new BPlusTree() },
                 //{ "2-3-4 дерево", new TwoThreeFourTree() },
             };
 
             currentTree = trees["Бинарное дерево поиска"];
             treeDrawer = new TreeDrawer();
+            bTreeDrawer = new BTreeDrawer();
 
             //TreeCanvas.Background = (Brush)Application.Current.Resources["CanvasBackgroundBrush"];
 
@@ -108,15 +112,27 @@ namespace Tree_Structures.View
                     bool found = currentTree.Search(value);
                     if (found)
                     {
-                        // Устанавливаем подсветку найденного узла
-                        treeDrawer.SetHighlightedNode(value);
+                        if (currentTree is BTree)
+                        {
+                            bTreeDrawer.SetHighlightedNode(value);
+                        }
+                        else
+                        {
+                            treeDrawer.SetHighlightedNode(value);
+                        }
                         RedrawTree();
                         MessageBox.Show($"Значение {value} найдено в дереве");
                     }
                     else
                     {
-                        // Сбрасываем подсветку если узел не найден
-                        treeDrawer.SetHighlightedNode(null);
+                        if (currentTree is BTree)
+                        {
+                            bTreeDrawer.SetHighlightedNode(null);
+                        }
+                        else
+                        {
+                            treeDrawer.SetHighlightedNode(null);
+                        }
                         RedrawTree();
                         MessageBox.Show($"Значение {value} не найдено в дереве");
                     }
@@ -134,32 +150,42 @@ namespace Tree_Structures.View
 
         private void RedrawTree()
         {
-            if (treeDrawer == null)
-            {
-                treeDrawer = new TreeDrawer();
-            }
-            // Очистка холста перед отрисовкой
             TreeCanvas.Children.Clear();
-            // Визуализация текущего дерева
-            treeDrawer.DrawTree(currentTree, TreeCanvas);
 
-            // Применяем цвета для разных типов деревьев
-            if (currentTree is BinarySearchTree)
+            // Определяем тип текущего дерева и выбираем соответствующий способ отрисовки
+            if (currentTree is BTree bTree)
             {
-                treeDrawer.NodeColor = (Brush)Application.Current.Resources["BSTNodeColorBrush"];
+                if (bTreeDrawer == null)
+                {
+                    bTreeDrawer = new BTreeDrawer();
+                }
+                bTreeDrawer.DrawTree(bTree, TreeCanvas);
             }
-            else if (currentTree is AVLTree)
+            else
             {
-                treeDrawer.NodeColor = (Brush)Application.Current.Resources["AVLNodeColorBrush"];
-            }
-            else if (currentTree is RedBlackTree)
-            {
-                treeDrawer.NodeColor = (Brush)Application.Current.Resources["RBNodeRedColorBrush"];
-            }
+                if (treeDrawer == null)
+                {
+                    treeDrawer = new TreeDrawer();
+                }
 
-            // Применяем цвета для других элементов, например, стрелок и обводок
-            treeDrawer.EllipseColor = (Brush)Application.Current.Resources["EllipseColorBrush"];
-            treeDrawer.ArrowColor = (Brush)Application.Current.Resources["ArrowColorBrush"];
+                // Настройка цветов для разных типов деревьев
+                if (currentTree is BinarySearchTree)
+                {
+                    treeDrawer.NodeColor = (Brush)Application.Current.Resources["BSTNodeColorBrush"];
+                }
+                else if (currentTree is AVLTree)
+                {
+                    treeDrawer.NodeColor = (Brush)Application.Current.Resources["AVLNodeColorBrush"];
+                }
+                else if (currentTree is RedBlackTree)
+                {
+                    treeDrawer.NodeColor = (Brush)Application.Current.Resources["RBNodeRedColorBrush"];
+                }
+
+                treeDrawer.EllipseColor = (Brush)Application.Current.Resources["EllipseColorBrush"];
+                treeDrawer.ArrowColor = (Brush)Application.Current.Resources["ArrowColorBrush"];
+                treeDrawer.DrawTree(currentTree, TreeCanvas);
+            }
         }
 
         private void TreeTypeComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -168,7 +194,14 @@ namespace Tree_Structures.View
             if (selectedTreeType != null && trees.ContainsKey(selectedTreeType))
             {
                 currentTree = trees[selectedTreeType];
-                treeDrawer.SetHighlightedNode(null); // Сбрасываем подсветку при смене типа дерева
+                if (currentTree is BTree)
+                {
+                    bTreeDrawer.SetHighlightedNode(null);
+                }
+                else
+                {
+                    treeDrawer.SetHighlightedNode(null);    // Сбрасываем подсветку при смене типа дерева
+                }
                 RedrawTree();
             }
         }

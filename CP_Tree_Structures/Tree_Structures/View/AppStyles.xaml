@@ -367,6 +367,9 @@
     <SolidColorBrush x:Key="AVLNodeColorBrush" Color="#FF1F9EFF" />
     <SolidColorBrush x:Key="RBNodeRedColorBrush" Color="#FFFF2D2D" />
     <SolidColorBrush x:Key="RBNodeBlackColorBrush" Color="#FF5E5C5C" />
+    <SolidColorBrush x:Key="MinHeapNodeColorBrush" Color="#FFBFC204" />
+    <SolidColorBrush x:Key="MaxHeapNodeColorBrush" Color="#FFDF8900" />
+    <SolidColorBrush x:Key="BTreeNodeColorBrush" Color="#FFB30CE5" />
 
     <!-- Цвет фона для холста -->
     <SolidColorBrush x:Key="CanvasBackgroundBrush" Color="Cornsilk" />

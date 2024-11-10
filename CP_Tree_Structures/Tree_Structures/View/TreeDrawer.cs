@@ -28,7 +28,9 @@ namespace Tree_Structures.View
                 { "BinarySearchTree", (Brush)Application.Current.Resources["BSTNodeColorBrush"] },
                 { "AVLTree", (Brush)Application.Current.Resources["AVLNodeColorBrush"] },
                 { "RedBlackTreeRed", (Brush)Application.Current.Resources["RBNodeRedColorBrush"] },
-                { "RedBlackTreeBlack", (Brush)Application.Current.Resources["RBNodeBlackColorBrush"] }
+                { "RedBlackTreeBlack", (Brush)Application.Current.Resources["RBNodeBlackColorBrush"] },
+                { "MinHeap", (Brush)Application.Current.Resources["MinHeapNodeColorBrush"] },
+                { "MaxHeap", (Brush)Application.Current.Resources["MaxHeapNodeColorBrush"] },
             };
         }
 
