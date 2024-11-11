@@ -39,6 +39,12 @@ namespace Tree_Structures.View
                 //{ "2-3-4 дерево", new TwoThreeFourTree() },
             };
 
+            this.MouseDown += (s, e) =>
+            {
+                if (e.LeftButton == MouseButtonState.Pressed)
+                    this.DragMove();
+            };
+
             currentTree = trees["Бинарное дерево поиска"];
             treeDrawer = new TreeDrawer();
             bTreeDrawer = new BTreeDrawer();
@@ -67,6 +73,7 @@ namespace Tree_Structures.View
                 {
                     currentTree.Insert(value);
                     treeDrawer.SetHighlightedNode(null); // Сбрасываем подсветку
+                    bTreeDrawer.SetHighlightedNode(null);
                     RedrawTree();
                     ValueTextBox.Clear();
                 }
@@ -88,7 +95,8 @@ namespace Tree_Structures.View
                 try
                 {
                     currentTree.Delete(value);
-                    treeDrawer.SetHighlightedNode(null); // Сбрасываем подсветку
+                    treeDrawer.SetHighlightedNode(null);
+                    bTreeDrawer.SetHighlightedNode(null);
                     RedrawTree();
                     ValueTextBox.Clear();
                 }
