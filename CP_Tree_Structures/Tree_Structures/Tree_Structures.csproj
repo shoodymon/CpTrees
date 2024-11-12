@@ -58,6 +58,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Helpers\WindowNavigationHelper.cs" />
     <Compile Include="Model\BinaryHeap.cs" />
     <Compile Include="Model\IBTree.cs" />
     <Compile Include="Model\ITree.cs" />
@@ -128,5 +129,6 @@
     <Resource Include="Assets\shutdown_def.png" />
     <Resource Include="Assets\shutdown_mo.png" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

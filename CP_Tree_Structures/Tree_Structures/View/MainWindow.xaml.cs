@@ -36,67 +36,80 @@ namespace Tree_Structures
                 this.DragMove();
         }
 
-        private void SwitchToNewWindow(Window newWindow)
+        private async Task SwitchToNewWindowAsync(Window newWindow)
         {
-            // Если есть активное окно, плавно скрываем его
+            currentActiveWindow = this;
+
+            // Если текущее активное окно есть, выполняем анимацию
             if (currentActiveWindow != null && currentActiveWindow.IsLoaded)
             {
-                var oldWindow = currentActiveWindow; // Сохраняем ссылку на старое окно
-                var fadeOut = new DoubleAnimation
-                {
-                    From = 1.0,
-                    To = 0.0,
-                    Duration = TimeSpan.FromMilliseconds(200)
-                };
+                var oldWindow = currentActiveWindow;
 
-                fadeOut.Completed += (s, e) =>
-                {
-                    oldWindow.Hide(); // Скрываем старое окно после завершения анимации
-
-                    // Показ нового окна с анимацией появления
-                    newWindow.Opacity = 0;
-                    var fadeIn = new DoubleAnimation
-                    {
-                        From = 0.0,
-                        To = 1.0,
-                        Duration = TimeSpan.FromMilliseconds(200)
-                    };
-
-                    newWindow.Show();
-                    newWindow.BeginAnimation(UIElement.OpacityProperty, fadeIn);
-
-                    // Обновляем ссылку на текущее активное окно
-                    currentActiveWindow = newWindow;
-
-                    // Дополнительно закрываем старое окно, если его больше не нужно использовать
-                    oldWindow.Close();
-                };
-
-                oldWindow.BeginAnimation(UIElement.OpacityProperty, fadeOut);
-            }
-            else
-            {
-                // Если активного окна нет, сразу показываем новое окно
+                // Показ нового окна с анимацией появления
                 newWindow.Opacity = 0;
                 var fadeIn = new DoubleAnimation
                 {
                     From = 0.0,
                     To = 1.0,
-                    Duration = TimeSpan.FromMilliseconds(200)
+                    Duration = TimeSpan.FromMilliseconds(150) // Плавное появление нового окна
                 };
 
                 newWindow.Show();
+                var fadeInCompletion = new TaskCompletionSource<bool>();
+                fadeIn.Completed += (s, e) => fadeInCompletion.SetResult(true);
                 newWindow.BeginAnimation(UIElement.OpacityProperty, fadeIn);
+
+                await fadeInCompletion.Task; // Ждём завершения появления нового окна
+
+                // Начинаем скрытие старого окна после появления нового
+                var fadeOut = new DoubleAnimation
+                {
+                    From = 1.0,
+                    To = 0.0,
+                    Duration = TimeSpan.FromMilliseconds(150) // Плавное скрытие старого окна
+                };
+
+                var fadeOutCompletion = new TaskCompletionSource<bool>();
+                fadeOut.Completed += (s, e) => fadeOutCompletion.SetResult(true);
+                oldWindow.BeginAnimation(UIElement.OpacityProperty, fadeOut);
+
+                await fadeOutCompletion.Task; // Ждём завершения анимации скрытия старого окна
+
+                oldWindow.Hide();
+                oldWindow.Close(); // Закрываем старое окно
+
+                // Обновляем ссылку на текущее активное окно
+                currentActiveWindow = newWindow;
+            }
+            else
+            {
+                // Если активного окна нет, просто показываем новое окно с анимацией
+                newWindow.Opacity = 0;
+                var fadeIn = new DoubleAnimation
+                {
+                    From = 0.0,
+                    To = 1.0,
+                    Duration = TimeSpan.FromMilliseconds(150)
+                };
+
+                newWindow.Show();
+                var fadeInCompletion = new TaskCompletionSource<bool>();
+                fadeIn.Completed += (s, e) => fadeInCompletion.SetResult(true);
+                newWindow.BeginAnimation(UIElement.OpacityProperty, fadeIn);
+
+                await fadeInCompletion.Task; // Ждём завершения анимации появления
 
                 currentActiveWindow = newWindow;
             }
         }
 
-        private void TreeSelectionButton_Click(object sender, RoutedEventArgs e)
+
+        private async void TreeSelectionButton_Click(object sender, RoutedEventArgs e)
         {
             var newTreeWindow = new TreeViewWindow();
-            SwitchToNewWindow(newTreeWindow);
+            await SwitchToNewWindowAsync(newTreeWindow);
         }
+
 
         private void SettingsButton_Click(object sender, RoutedEventArgs e)
         {
