@@ -51,12 +51,10 @@ namespace Tree_Structures
             MessageBox.Show("Settings window will be implemented later.");
         }
 
-        private void TutorialsButton_Click(object sender, RoutedEventArgs e)
+        private async void TutorialsButton_Click(object sender, RoutedEventArgs e)
         {
-            // Когда будет реализовано окно туториалов:
-            // var tutorialsWindow = new TutorialsWindow();
-            // SwitchToNewWindow(tutorialsWindow);
-            MessageBox.Show("Tutorials window will be implemented later.");
+            var tutorialsWindow = new TutorialsWindow();
+            await App.WindowManager.SwitchToWindowAsync(tutorialsWindow);
         }
 
         private void AuthorButton_Click(object sender, RoutedEventArgs e)

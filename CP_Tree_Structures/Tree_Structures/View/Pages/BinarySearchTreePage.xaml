@@ -1,0 +1,120 @@
+﻿<Page x:Class="Tree_Structures.View.Pages.BinarySearchTreePage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Tree_Structures.View.Pages"
+      xmlns:avalon="http://icsharpcode.net/sharpdevelop/avalonedit"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="BinarySearchTreePage">
+
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
+        <StackPanel Margin="20">
+            <TextBlock Text="Бинарное дерево" Style="{StaticResource HeadingStyle}"/>
+
+            <TextBlock Style="{StaticResource DescriptionStyle}">
+                Бинарное дерево - это иерархическая структура данных, в которой каждый узел имеет значение (оно же является и ключом) и ссылки на левого и правого потомка. Узел, находящийся на самом верхнем уровне (не являющийся чьим-либо потомком) называется корнем. Узлы, не имеющие потомков (оба потомка которых равны NULL) называются листьями.
+            </TextBlock>
+
+            <Image Source="/Assets/binary_tree.png" 
+                   Style="{StaticResource ImageStyle}"/>
+            <TextBlock Text="Рис. 1 - Бинарное дерево" 
+                       Style="{StaticResource CaptionStyle}"/>
+
+            <TextBlock Text="Бинарное дерево поиска" Style="{StaticResource HeadingStyle}"/>
+
+            <TextBlock Style="{StaticResource DescriptionStyle}">
+                Бинарные деревья поиска отличаются от обычных бинарных деревьев тем, что хранят данные в отсортированном виде. Хранение значений внутри бинарного дерева поиска организовано в следующем виде:
+                <LineBreak />
+                1. Все значения в узлах левого дочернего поддерева меньше значения родительского узла
+                <LineBreak />
+                2. Все значения в узлах правого дочернего поддерева больше значения родительского узла
+                <LineBreak />
+                3. Каждый дочерний узел тоже является бинарным деревом поиска
+            </TextBlock>
+
+            <Image Source="/Assets/binary_search_tree.png" 
+                   Style="{StaticResource ImageStyle}"/>
+            <TextBlock Text="Рис. 2 - Бинарное дерево поиска" 
+                       Style="{StaticResource CaptionStyle}"/>
+
+            <TextBlock Style="{StaticResource SubtitleStyle}">
+                Cвойства бинарных деревьев:
+            </TextBlock>
+
+            <TextBlock Style="{StaticResource DescriptionStyle}">
+                1. Должно быть не более двух дочерних узлов
+                <LineBreak />
+                2. Дочерние узлы тоже должны быть бинарными деревьями
+                <LineBreak />
+                3. Дочерние узлы называют левыми и правыми
+            </TextBlock>
+
+            <avalon:TextEditor Name="BSTreeCodeEditor" SyntaxHighlighting="C#" 
+                               FontFamily="Cascadia Mono" FontSize="14" 
+                               IsReadOnly="True" VerticalScrollBarVisibility="Auto" 
+                               HorizontalScrollBarVisibility="Auto" 
+                               Loaded="BSTreeCodeEditor_Loaded"/>
+
+            <TextBlock Style="{StaticResource SubtitleStyle}">
+                Вставка узла
+            </TextBlock>
+
+            <TextBlock Style="{StaticResource DescriptionStyle}">
+                Все значения меньше текущего значения узла надо размещать в левом поддереве, а большие — в правом. Чтобы вставить новый узел, нужно проверить, что текущий узел не пуст.
+                <LineBreak />
+                Далее может быть два пути:
+                <LineBreak />
+                1. Если это так, сравниваем значение со вставляемым. По результату сравнения проводим проверку для правого или левого поддеревьев
+                <LineBreak />
+                2. Если узел пуст, создаем новый и заполняем ссылку на текущий узел в качестве родителя
+            </TextBlock>
+
+            <avalon:TextEditor Name="BSTreeAddNodeCodeEditor" SyntaxHighlighting="C#" 
+                               FontFamily="Cascadia Mono" FontSize="14" 
+                               IsReadOnly="True" VerticalScrollBarVisibility="Auto" 
+                               HorizontalScrollBarVisibility="Auto"
+                               Loaded="BSTreeAddNodeCodeEditor_Loaded"/>
+
+            <TextBlock Style="{StaticResource SubtitleStyle}">
+                Удаление узла
+            </TextBlock>
+
+            <TextBlock Style="{StaticResource DescriptionStyle}">
+                Чтобы удалить элемент в связном списке, нужно найти его и ссылку на следующий элемент перенести в поле ссылки на предыдущем элементе.
+                <LineBreak />
+                Если необходимо удалить корневой узел или промежуточные вершины и сохранить структуру бинарного дерева поиска, выбирают один из следующих двух способов:
+                <LineBreak />
+                1. Находим и удаляем максимальный элемент левого поддерева и используем его значение в качестве корневого или промежуточного узла
+                <LineBreak />
+                2. Находим и удаляем минимальный элемент правого поддерева и используем его значение в качестве корневого или промежуточного узла
+            </TextBlock>
+
+            <Image Source="/Assets/bst_del.png" 
+                    Style="{StaticResource ImageStyle}"/>
+
+            <avalon:TextEditor Name="BSTreeDelNodeCodeEditor" SyntaxHighlighting="C#" 
+                               FontFamily="Cascadia Mono" FontSize="14" 
+                               IsReadOnly="True" VerticalScrollBarVisibility="Auto" 
+                               HorizontalScrollBarVisibility="Auto"
+                               Loaded="BSTreeDelNodeCodeEditor_Loaded"/>
+
+            <TextBlock Style="{StaticResource SubtitleStyle}">
+                Поиск узла
+            </TextBlock>
+
+            <TextBlock Style="{StaticResource DescriptionStyle}">
+                Если искомое значение бинарного дерева поиска меньше значения узла, то оно может находиться только в левом поддереве. Искомое значение, которое больше значения узла, может быть только в правом поддереве.
+                <LineBreak />
+                В таком случае мы можем применить рекурсивный подход и операция поиска будет выглядеть так:
+            </TextBlock>
+
+            <avalon:TextEditor Name="BSTreeSearchNodeCodeEditor" SyntaxHighlighting="C#" 
+                   FontFamily="Cascadia Mono" FontSize="14" 
+                   IsReadOnly="True" VerticalScrollBarVisibility="Auto" 
+                   HorizontalScrollBarVisibility="Auto"
+                   Loaded="BSTreeSearchNodeCodeEditor_Loaded"/>
+        </StackPanel>
+    </ScrollViewer>
+</Page>

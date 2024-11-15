@@ -1,0 +1,40 @@
+﻿<Window x:Class="Tree_Structures.View.TutorialsWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Tree_Structures.View"
+        mc:Ignorable="d"
+        Title="Туториалы" Style="{StaticResource MainWindowStyle}"
+        WindowStartupLocation="CenterScreen" WindowStyle="None" ResizeMode="NoResize"
+        AllowsTransparency="True" Background="Transparent">
+    <Border Background="#1C1D31" CornerRadius="25">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="300" />
+            </Grid.ColumnDefinitions>
+
+            <Border Background="{DynamicResource CanvasBackgroundBrush}" CornerRadius="25" Margin="20,30,10,20" BorderThickness="2" BorderBrush="#FFFF0900">
+                <Frame x:Name="TutorialFrame" NavigationUIVisibility="Hidden" Margin="10" />
+            </Border>
+
+            <Grid Grid.Column="1" Margin="20">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+
+                <Border Grid.Row="0" CornerRadius="8" Margin="5">
+                    <ComboBox x:Name="TreeTypeComboBox" SelectionChanged="TreeTypeComboBox_SelectionChanged" Style="{StaticResource GradientComboBoxStyle}" />
+                </Border>
+
+                <Border Grid.Row="1" CornerRadius="20" Margin="5" Background="#FF006D92">
+                    <ScrollViewer VerticalScrollBarVisibility="Auto">
+                        <TextBlock x:Name="TutorialTextBlock" Foreground="White" Padding="20" TextWrapping="Wrap" />
+                    </ScrollViewer>
+                </Border>
+            </Grid>
+        </Grid>
+    </Border>
+</Window>
