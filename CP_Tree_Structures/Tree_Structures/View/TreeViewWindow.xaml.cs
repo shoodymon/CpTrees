@@ -55,7 +55,7 @@ namespace Tree_Structures.View
             AddNodeButton.Click += AddNodeButton_Click;
             DeleteNodeButton.Click += DeleteNodeButton_Click;
             SearchNodeButton.Click += SearchNodeButton_Click;
-            BackButton.Click += (s, e) => Close();
+            BackButton.Click += BackButton_Click;
 
             // Заполнение ComboBox
             foreach (var treeType in trees.Keys)
@@ -63,6 +63,11 @@ namespace Tree_Structures.View
                 TreeTypeComboBox.Items.Add(treeType);
             }
             TreeTypeComboBox.SelectedItem = "Бинарное дерево поиска";
+        }
+
+        private async void BackButton_Click(object sender, RoutedEventArgs e)
+        {
+            await App.WindowManager.SwitchToWindowAsync(App.WindowManager.MainWindow);
         }
 
         private void AddNodeButton_Click(object sender, RoutedEventArgs e)
