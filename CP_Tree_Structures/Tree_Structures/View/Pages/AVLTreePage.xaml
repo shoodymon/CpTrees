@@ -1,0 +1,175 @@
+﻿<Page x:Class="Tree_Structures.View.Pages.AVLTreePage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Tree_Structures.View.Pages"
+      xmlns:avalon="http://icsharpcode.net/sharpdevelop/avalonedit"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="AVLTreePage">
+
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
+        <StackPanel Margin="20">
+            <TextBlock Text="Сбалансированные деревья" Style="{StaticResource HeadingStyle}"/>
+
+            <TextBlock Style="{StaticResource DescriptionStyle}">
+                Идеальная сбалансированность — это свойство дерева, при котором все его уровни, иногда кроме последнего, полностью заполнены.
+                <LineBreak />
+                <LineBreak />
+                Для сравнения рассмотрим два бинарных дерева поиска, которые будут представлять собой одну последовательность элементов — 1,2,3,4,5,6. Из этой последовательности можно построить несколько деревьев, например:
+            </TextBlock>
+
+            <Image Source="/Assets/AVL/balanced_trees.png" 
+                   Style="{StaticResource ImageStyle}"/>
+
+            <TextBlock Style="{StaticResource DescriptionStyle}">
+                В дереве (б) каждый из уровней, кроме левой ветки узла 1, заполнены. Значит, дерево (б) — идеально сбалансированное дерево. Что нельзя сказать о дереве (а).
+                <LineBreak />
+                <LineBreak />
+                Дерево (а) и дерево (б) можно отнести к бинарным деревьям поиска. Но для худшего случая — поиска в дереве элемента №6 в дереве (а) — требуется выполнить шесть операций перехода между вершинами, а в случае (б) — только три.
+                <LineBreak />
+                <LineBreak />
+                Дерево с максимально возможной высотой (а) называется разбалансированным или вырожденным деревом. Оно не отличается от двусвязного списка, значит, теряет свое основное преимущество — скорость поиска.
+                <LineBreak />
+                <LineBreak />
+                Состояние идеальной сбалансированности в дереве трудно поддерживать. Любое добавление или удаление узла в сбалансированном дереве может привести к ситуации, когда дерево выйдет из идеально сбалансированного состояния. В таком случае скорость поиска будет значительно деградировать после каждой вставки или удаления узла.
+                <LineBreak />
+                <LineBreak />
+                Чтобы вернуть дерево в сбалансированный вид, его перестраивают после каждой манипуляции с составом узлов. Рассмотрим пример с добавлением элемента №7 в наше дерево. Это можно сделать несколькими способами:
+            </TextBlock>
+
+            <Image Source="/Assets/AVL/balanced_trees_2.png" 
+                   Style="{StaticResource ImageStyle}"/>
+
+            <TextBlock Style="{StaticResource DescriptionStyle}">
+                В случае (б) дерево вышло из состояния идеальной сбалансированности, так как оба нижних уровня не заполнены полностью. В таком случае поиск элемента №7 будет выполнен за четыре операции.
+                <LineBreak />
+                В случае (а) элементы были перераспределены, чтобы сохранить сбалансированное состояние. В таком случае поиск элемента №7 будет выполнен всего за три операции.
+            </TextBlock>
+
+            <TextBlock Text="АВЛ-деревья" Style="{StaticResource HeadingStyle}"/>
+
+            <TextBlock Style="{StaticResource DescriptionStyle}">
+                АВЛ-деревья отличаются от идеально сбалансированных. АВЛ-дерево считается сбалансированным, если для каждого узла дерева высота его правого и левого поддеревьев отличаются не более чем на единицу. Если модификация структуры узлов приводит к нарушению сбалансированности дерева, то необходимо выполнить его балансировку.
+                <LineBreak />
+                <LineBreak />
+                Поиск в АВЛ-дереве выполняется аналогично работе с бинарным деревом поиска. При этом благодаря поддержке возможности ребалансировки при вставки и удалении узлов в АВЛ-деревьях есть особенности реализации.
+                <LineBreak />
+                <LineBreak />
+                В качестве индикатора наличия разбалансированности в поддереве на узел выносят показатель баланса, который принимает значения от -1 до +1. Их значения:
+                <LineBreak />
+                *   –1 — в правом поддереве больше высота
+                <LineBreak />
+                *   0 — поддеревья равной высоты
+                <LineBreak />
+                *   +1 — высота больше в левом поддереве
+                <LineBreak />
+                <LineBreak />
+                В итоге код нашего узла принимает следующий вид:
+            </TextBlock>
+
+            <avalon:TextEditor Name="AVLtreeCodeEditor" SyntaxHighlighting="C#" 
+                               FontFamily="Cascadia Mono" FontSize="14" 
+                               IsReadOnly="True" VerticalScrollBarVisibility="Auto" 
+                               HorizontalScrollBarVisibility="Auto"
+                               Loaded="AVLtreeCodeEditor_Loaded"/>
+
+            <TextBlock Style="{StaticResource SubtitleStyle}">
+                Модификация структуры узлов
+            </TextBlock>
+
+            <TextBlock Style="{StaticResource DescriptionStyle}">
+                Добавить новую вершину можно с помощью рекурсивного спуска к месту вставки нового узла. Если возвращаться к корневой вершине через каждый промежуточный узел, то добавивший новую вершину метод модифицирует значение balanceFactor. Если новое значение выходит из допустимого диапазона, то выполняется ребалансировка данного поддерева.                <LineBreak />
+                <LineBreak />
+                Ребалансировка деревьев осуществляется при помощи специальных механизмов — методов вращения. Вращения бывают двух видов: левое и правое.
+                <LineBreak />
+                <LineBreak />
+                Вращение вправо выполняется за три шага:
+                <LineBreak />
+                <LineBreak />
+                1. Текущий корень поддерева (D) заменяется на левый дочерний узел (B)
+                <LineBreak />
+                2. Предыдущий корень (D) становится правым дочерним узлом для (B)
+                <LineBreak />
+                3. Предыдущее правое поддерево узла (B) становится левым поддеревом для (D)
+            </TextBlock>
+
+            <Image Source="/Assets/AVL/AVL_right_rotation.png" 
+                   Style="{StaticResource ImageStyle}"/>
+            <TextBlock Text="Рис. - Правый поворот" 
+                   Style="{StaticResource CaptionStyle}"/>
+
+            <TextBlock Style="{StaticResource DescriptionStyle}">
+                Вращение влево выполняется аналогично:
+                <LineBreak />
+                <LineBreak />
+                1. Текущий корень поддерева (D) заменяется на правый дочерний узел ©
+                <LineBreak />
+                2. Предыдущий корень (D) становится левым дочерним узлом для ©
+                <LineBreak />
+                3. Предыдущее левое поддерево узла © становится правым поддеревом для (D)
+            </TextBlock>
+
+            <Image Source="/Assets/AVL/AVL_left_rotation.png" 
+                   Style="{StaticResource ImageStyle}"/>
+            <TextBlock Text="Рис. - Левый поворот" 
+                   Style="{StaticResource CaptionStyle}"/>
+
+            <TextBlock Style="{StaticResource DescriptionStyle}">
+                В зависимости от того, куда добавили новую вершину, возможны различные комбинации выполнения вращений. Они помогут вернуть дерево в сбалансированное состояние.
+                <LineBreak />
+                <LineBreak />
+                Всего выделяется четыре варианта развития событий:
+                <LineBreak />
+                <LineBreak />
+                1. Левое поддерево левой дочерней вершины
+                <LineBreak />
+                2. Левое поддерево правой дочерней вершины
+                <LineBreak />
+                3. Правое поддерево левой дочерней вершины
+                <LineBreak />
+                4. Правое поддерево правой дочерней вершины
+            </TextBlock>
+
+            <TextBlock Style="{StaticResource SubtitleStyle}">
+                Вставка узла
+            </TextBlock>
+
+            <TextBlock Style="{StaticResource DescriptionStyle}">
+                Рассмотрим пример, который описывает первый случай — вставку в левое поддерево левой дочерней вершины. Изображенные треугольники представляют собой сбалансированные АВЛ-поддеревья. Они могут содержать большое количество вершин. У вершины В дерево не сбалансировано, поскольку поддерево А1 в вершине А на два уровня выше, чем поддерево В2:                <LineBreak />
+            </TextBlock>
+
+            <Image Source="/Assets/AVL/AVL_insert.png" 
+                   Style="{StaticResource ImageStyle}"/>
+
+            <TextBlock Style="{StaticResource DescriptionStyle}">
+                Чтобы сбалансировать дерево, необходимо совершить правое вращение — заменить вершину В вершиной А и сделать поддерево А2 левым поддеревом вершины В. После такого преобразования наше поддерево примет следующий вид:
+            </TextBlock>
+
+            <Image Source="/Assets/AVL/AVL_insert_2.png" 
+                   Style="{StaticResource ImageStyle}"/>
+
+            <TextBlock Style="{StaticResource DescriptionStyle}">
+                Четвертый сценарий будет выглядеть аналогично кроме замены способа вращения на левое.
+                <LineBreak />
+                <LineBreak />
+                Для второго и третьего сценариев необходимо выполнить вращение дважды:
+            </TextBlock>
+
+            <Image Source="/Assets/AVL/AVL_insert_3.png" 
+                   Style="{StaticResource ImageStyle}"/>
+
+            <TextBlock Style="{StaticResource SubtitleStyle}">
+                Удаление узла
+            </TextBlock>
+
+            <TextBlock Style="{StaticResource DescriptionStyle}">
+                Удаление узлов также осуществляется при помощи механизмов вращения. При возврате во время рекурсивного спуска осуществляется вычисление balanceFactor. Если он отклоняется от допустимых значений, то выполняется ребалансировка аналогично добавлению узла.
+            </TextBlock>
+
+            <Image Source="/Assets/AVL/AVL_delete.png" 
+                Style="{StaticResource ImageStyle}"/>
+        </StackPanel>
+    </ScrollViewer>
+</Page>

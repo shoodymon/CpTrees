@@ -17,7 +17,7 @@
                 Бинарное дерево - это иерархическая структура данных, в которой каждый узел имеет значение (оно же является и ключом) и ссылки на левого и правого потомка. Узел, находящийся на самом верхнем уровне (не являющийся чьим-либо потомком) называется корнем. Узлы, не имеющие потомков (оба потомка которых равны NULL) называются листьями.
             </TextBlock>
 
-            <Image Source="/Assets/binary_tree.png" 
+            <Image Source="/Assets/BST/binary_tree.png" 
                    Style="{StaticResource ImageStyle}"/>
             <TextBlock Text="Рис. 1 - Бинарное дерево" 
                        Style="{StaticResource CaptionStyle}"/>
@@ -34,7 +34,7 @@
                 3. Каждый дочерний узел тоже является бинарным деревом поиска
             </TextBlock>
 
-            <Image Source="/Assets/binary_search_tree.png" 
+            <Image Source="/Assets/BST/binary_search_tree.png" 
                    Style="{StaticResource ImageStyle}"/>
             <TextBlock Text="Рис. 2 - Бинарное дерево поиска" 
                        Style="{StaticResource CaptionStyle}"/>
@@ -91,7 +91,7 @@
                 2. Находим и удаляем минимальный элемент правого поддерева и используем его значение в качестве корневого или промежуточного узла
             </TextBlock>
 
-            <Image Source="/Assets/bst_del.png" 
+            <Image Source="/Assets/BST/bst_del.png" 
                     Style="{StaticResource ImageStyle}"/>
 
             <avalon:TextEditor Name="BSTreeDelNodeCodeEditor" SyntaxHighlighting="C#" 

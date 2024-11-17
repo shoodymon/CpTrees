@@ -1,0 +1,70 @@
+﻿<Page x:Class="Tree_Structures.View.Pages.RBTreePage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Tree_Structures.View.Pages"
+      xmlns:avalon="http://icsharpcode.net/sharpdevelop/avalonedit"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="RBTreePage">
+
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
+        <StackPanel Margin="20">
+            <TextBlock Text="Красно-черные деревья" Style="{StaticResource HeadingStyle}"/>
+
+            <TextBlock Style="{StaticResource DescriptionStyle}">
+                Красно-черные деревья — одни из наиболее активно используемых на практике самобалансирующихся деревьев. Они так называются из-за наличия на узле дополнительного поля, в котором размещается цвет узла. В качестве стандартных цветов используют обычно красные и черные узлы, а сам цвет узла используется во время балансировки.            <LineBreak />
+                <LineBreak />
+                Так как красно-черные деревья самобалансирующиеся, то среднее и худшее время поиска тоже составляют O(log(N)). А операции вставки и удаления узла могут потребовать поворот поддерева.
+                <LineBreak />
+                <LineBreak />
+                Для красно-черного дерева наш код узла примет следующий вид:
+            </TextBlock>
+
+            <avalon:TextEditor Name="RBTreeCodeEditor" SyntaxHighlighting="C#" 
+                               FontFamily="Cascadia Mono" FontSize="14" 
+                               IsReadOnly="True" VerticalScrollBarVisibility="Auto" 
+                               HorizontalScrollBarVisibility="Auto"
+                               Loaded="RBTreeCodeEditor_Loaded"/>      
+
+            <TextBlock Style="{StaticResource DescriptionStyle}">
+                <LineBreak />
+                В отличие от других видов деревьев в листовых узлах красно-черных деревьев не хранят полезную нагрузку. А цвет листовых узлов без данных всегда считается черным. Такая особенность позволяет считать ссылку на null валидным узлом. Эта особенность позволит сэкономить память. А само дерево принимает следующий вид:
+                <LineBreak />
+            </TextBlock>
+
+            <Image Source="/Assets/RBT/RB_view.png" 
+               Style="{StaticResource ImageStyle}"/>
+
+            <TextBlock Style="{StaticResource DescriptionStyle}">
+                Помимо особенностей работы с листовыми узлами к свойствам красно-черного так же относят:
+                <LineBreak />
+                1. Корень красно-черного дерева черный
+                <LineBreak />
+                2. Две красные вершины не могут идти подряд ни на одном пути. Оба потомка каждого красного узла — черные
+                <LineBreak />
+                3. Для каждой вершины, в каждом исходящем из нее пути, одинаковое число черных вершин
+                <LineBreak />
+                <LineBreak />
+                Иногда при работе с узлами красно-черного дерева используют черную высоту — количество черных вершин на исходящих из нее путях, не включая саму исходную вершину.
+            </TextBlock>
+
+            <TextBlock Style="{StaticResource SubtitleStyle}">
+                Вставка узла
+            </TextBlock>
+
+            <TextBlock Style="{StaticResource DescriptionStyle}">
+                1. Чтобы вставить узел, мы сначала ищем в дереве место, куда его следует добавить. 
+                <LineBreak />
+                2. Новый узел всегда добавляется как лист, поэтому оба его потомка являются пустыми узлами и предполагаются черными. 
+                <LineBreak />
+                3. После вставки красим узел в красный цвет. 
+                <LineBreak />
+                4. Далее смотрим на предка и проверяем, не нарушается ли свойства дерева, которые описали выше.
+                <LineBreak />
+                5. Если необходимо, мы перекрашиваем узел и производим поворот, чтобы сбалансировать дерево.
+            </TextBlock>
+        </StackPanel>
+    </ScrollViewer>
+</Page>

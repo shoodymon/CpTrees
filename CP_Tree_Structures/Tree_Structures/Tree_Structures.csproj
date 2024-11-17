@@ -70,8 +70,20 @@
     <Compile Include="ViewModel\TreeViewModel.cs" />
     <Compile Include="ViewModel\WindowManager.cs" />
     <Compile Include="View\BTreeDrawer.cs" />
+    <Compile Include="View\Pages\AVLTreePage.xaml.cs">
+      <DependentUpon>AVLTreePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Pages\BinaryHeapPage.xaml.cs">
+      <DependentUpon>BinaryHeapPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\Pages\BinarySearchTreePage.xaml.cs">
       <DependentUpon>BinarySearchTreePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Pages\BTreePage.xaml.cs">
+      <DependentUpon>BTreePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Pages\RBTreePage.xaml.cs">
+      <DependentUpon>RBTreePage.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\TreeDrawer.cs" />
     <Compile Include="View\TreeView.cs" />
@@ -97,11 +109,27 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="View\Pages\AVLTreePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Pages\BinaryHeapPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\Pages\BinarySearchTreePage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\Pages\BTreePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\Pages\PagesStyles.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Pages\RBTreePage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -152,13 +180,59 @@
     <Resource Include="Assets\shutdown_mo.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Assets\binary_tree.png" />
+    <Resource Include="Assets\BST\binary_tree.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Assets\binary_search_tree.png" />
+    <Resource Include="Assets\BST\binary_search_tree.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Assets\bst_del.png" />
+    <Resource Include="Assets\BST\bst_del.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\AVL\balanced_trees.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\AVL\balanced_trees_2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\AVL\AVL_left_rotation.png" />
+    <Resource Include="Assets\AVL\AVL_right_rotation.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\AVL\AVL_insert.png" />
+    <Resource Include="Assets\AVL\AVL_insert_2.png" />
+    <Resource Include="Assets\AVL\AVL_insert_3.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\AVL\AVL_delete.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\RBT\RB_view.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\BH\BH_insert.png" />
+    <Resource Include="Assets\BH\BH_insert_2.png" />
+    <Resource Include="Assets\BH\BH_insert_3.png" />
+    <Resource Include="Assets\BH\BH_view.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\BH\BH_ordering.png" />
+    <Resource Include="Assets\BH\BH_ordering_2.png" />
+    <Resource Include="Assets\BH\BH_ordering_3.png" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Assets\BT\BT_insert.png" />
+    <Resource Include="Assets\BT\BT_insert_10.png" />
+    <Resource Include="Assets\BT\BT_insert_2.png" />
+    <Resource Include="Assets\BT\BT_insert_3.png" />
+    <Resource Include="Assets\BT\BT_insert_4.png" />
+    <Resource Include="Assets\BT\BT_insert_5.png" />
+    <Resource Include="Assets\BT\BT_insert_6.png" />
+    <Resource Include="Assets\BT\BT_insert_7.png" />
+    <Resource Include="Assets\BT\BT_insert_8.png" />
+    <Resource Include="Assets\BT\BT_insert_9.png" />
+    <Resource Include="Assets\BT\BT_view.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

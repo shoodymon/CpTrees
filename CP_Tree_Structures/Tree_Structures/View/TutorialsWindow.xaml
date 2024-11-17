@@ -15,23 +15,32 @@
                 <ColumnDefinition Width="300" />
             </Grid.ColumnDefinitions>
 
+            <!-- Frame для отображения выбранной страницы -->
             <Border Background="{DynamicResource CanvasBackgroundBrush}" CornerRadius="25" Margin="20,30,10,20" BorderThickness="2" BorderBrush="#FFFF0900">
                 <Frame x:Name="TutorialFrame" NavigationUIVisibility="Hidden" Margin="10" />
             </Border>
 
+            <!-- Боковая панель с ComboBox для выбора типа дерева -->
             <Grid Grid.Column="1" Margin="20">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
 
+                <!-- ComboBox для выбора типа дерева с элементами из привязки -->
                 <Border Grid.Row="0" CornerRadius="8" Margin="5">
-                    <ComboBox x:Name="TreeTypeComboBox" SelectionChanged="TreeTypeComboBox_SelectionChanged" Style="{StaticResource GradientComboBoxStyle}" />
+                    <ComboBox x:Name="TreeTypeComboBox" 
+                              SelectionChanged="TreeTypeComboBox_SelectionChanged"
+                              DisplayMemberPath="DisplayName" 
+                              SelectedIndex="0"
+                              Style="{StaticResource GradientComboBoxStyle}" />
                 </Border>
 
+                <!-- Область для отображения текстовых инструкций -->
                 <Border Grid.Row="1" CornerRadius="20" Margin="5" Background="#FF006D92">
                     <ScrollViewer VerticalScrollBarVisibility="Auto">
-                        <TextBlock x:Name="TutorialTextBlock" Foreground="White" Padding="20" TextWrapping="Wrap" />
+                        <TextBlock x:Name="TutorialTextBlock" Foreground="White" 
+                                   Padding="20" TextWrapping="Wrap" />
                     </ScrollViewer>
                 </Border>
             </Grid>

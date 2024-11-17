@@ -1,0 +1,152 @@
+﻿<Page x:Class="Tree_Structures.View.Pages.BinaryHeapPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Tree_Structures.View.Pages"
+      xmlns:avalon="http://icsharpcode.net/sharpdevelop/avalonedit"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="BinaryHeapPage">
+
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
+        <StackPanel Margin="20">
+            <TextBlock Text="Двоичная куча (binary heap)" Style="{StaticResource HeadingStyle}"/>
+
+            <TextBlock Style="{StaticResource DescriptionStyle}">
+                Двоичная куча (binary heap) – просто реализуемая структура данных, позволяющая быстро (за логарифмическое время) добавлять элементы и извлекать элемент с максимальным приоритетом (например, максимальный по значению).
+                <LineBreak />
+                <LineBreak />
+                Двоичная куча представляет собой полное бинарное дерево, для которого выполняется основное свойство кучи: приоритет каждой вершины больше приоритетов её потомков.
+                <LineBreak />
+                В простейшем случае приоритет каждой вершины можно считать равным её значению. В таком случае структура называется max-heap, поскольку корень поддерева является максимумом из значений элементов поддерева.
+            </TextBlock>
+
+            <Image Source="/Assets/BH/BH_view.png" 
+                   Style="{StaticResource ImageStyle}"/>
+
+            <TextBlock Style="{StaticResource DescriptionStyle}">
+                Двоичную кучу удобно хранить в виде одномерного массива, причем левый потомок вершины с индексом i имеет индекс 2*i+1, а правый 2*i+2.
+                <LineBreak />
+                Корень дерева – элемент с индексом 0. Высота двоичной кучи равна высоте дерева, то есть log2 N, где N – количество элементов массива.
+            </TextBlock>
+
+            <avalon:TextEditor Name="BHeapCodeEditor" SyntaxHighlighting="C#" 
+                               FontFamily="Cascadia Mono" FontSize="14" 
+                               IsReadOnly="True" VerticalScrollBarVisibility="Auto" 
+                               HorizontalScrollBarVisibility="Auto"
+                               Loaded="BHeapCodeEditor_Loaded"/>
+
+            <TextBlock Style="{StaticResource SubtitleStyle}">
+                Добавление элемента
+            </TextBlock>
+
+            <TextBlock Style="{StaticResource DescriptionStyle}">
+                Новый элемент добавляется на последнее место в массиве, то есть позицию с индексом heapSize:
+            </TextBlock>
+
+            <Image Source="/Assets/BH/BH_insert.png" 
+                   Style="{StaticResource ImageStyle}"/>
+
+            <TextBlock Style="{StaticResource DescriptionStyle}">
+                Возможно, что при этом будет нарушено основное свойство кучи, так как новый элемент может быть больше родителя. В таком случае следует «поднимать» новый элемент на один уровень (менять с вершиной-родителем) до тех пор, пока не будет соблюдено основное свойство кучи:
+            </TextBlock>
+
+            <Image Source="/Assets/BH/BH_insert_2.png" 
+                   Style="{StaticResource ImageStyle}"/>
+
+            <Image Source="/Assets/BH/BH_insert_3.png" 
+                   Style="{StaticResource ImageStyle}"/>
+
+            <TextBlock Style="{StaticResource DescriptionStyle}">
+                Иначе говоря, новый элемент «всплывает», «проталкивается» вверх, пока не займет свое место. Сложность алгоритма не превышает высоты двоичной кучи (так как количество «подъемов» не больше высоты дерева), то есть равна O(log2 N).
+            </TextBlock>
+
+            <avalon:TextEditor Name="BHeapAddCodeEditor" SyntaxHighlighting="C#" 
+                               FontFamily="Cascadia Mono" FontSize="14" 
+                               IsReadOnly="True" VerticalScrollBarVisibility="Auto" 
+                               HorizontalScrollBarVisibility="Auto"
+                               Loaded="BHeapAddCodeEditor_Loaded"/>
+
+            <TextBlock Style="{StaticResource SubtitleStyle}">
+                Упорядочение двоичной кучи
+            </TextBlock>
+
+            <TextBlock Style="{StaticResource DescriptionStyle}">
+                В ходе других операций с уже построенной двоичной кучей также может нарушиться основное свойство кучи: вершина может стать меньше своего потомка.
+            </TextBlock>
+
+            <Image Source="/Assets/BH/BH_ordering.png" 
+                   Style="{StaticResource ImageStyle}"/>
+
+            <TextBlock Style="{StaticResource DescriptionStyle}">
+                Метод heapify восстанавливает основное свойство кучи для дерева с корнем в i-ой вершине при условии, что оба поддерева ему удовлетворяют. Для этого необходимо «опускать» i-ую вершину (менять местами с наибольшим из потомков), пока основное свойство не будет восстановлено (процесс завершится, когда не найдется потомка, большего своего родителя). Нетрудно понять, что сложность этого алгоритма также равна O(log2 N).
+            </TextBlock>
+
+            <Image Source="/Assets/BH/BH_ordering_2.png" 
+                   Style="{StaticResource ImageStyle}"/>
+
+            <Image Source="/Assets/BH/BH_ordering_3.png" 
+                   Style="{StaticResource ImageStyle}"/>
+
+            <avalon:TextEditor Name="BHeapHeapifyCodeEditor" SyntaxHighlighting="C#" 
+                               FontFamily="Cascadia Mono" FontSize="14" 
+                               IsReadOnly="True" VerticalScrollBarVisibility="Auto" 
+                               HorizontalScrollBarVisibility="Auto"
+                               Loaded="BHeapHeapifyCodeEditor_Loaded"/>
+
+            <TextBlock Style="{StaticResource SubtitleStyle}">
+                Построение двоичной кучи
+            </TextBlock>
+
+            <TextBlock Style="{StaticResource DescriptionStyle}">
+                Наиболее очевидный способ построить кучу из неупорядоченного массива – это по очереди добавить все его элементы. Временная оценка такого алгоритма O(N log2 N). 
+                <LineBreak />
+                Однако можно построить кучу еще быстрее — за О(N). Сначала следует построить дерево из всех элементов массива, не заботясь о соблюдении основного свойства кучи, а потом вызвать метод heapify для всех вершин, у которых есть хотя бы один потомок (так как поддеревья, состоящие из одной вершины без потомков, уже упорядочены). Потомки гарантированно есть у первых heapSize/2 вершин.
+            </TextBlock>
+
+            <avalon:TextEditor Name="BuildBHeapCodeEditor" SyntaxHighlighting="C#" 
+                               FontFamily="Cascadia Mono" FontSize="14" 
+                               IsReadOnly="True" VerticalScrollBarVisibility="Auto" 
+                               HorizontalScrollBarVisibility="Auto"
+                               Loaded="BuildBHeapCodeEditor_Loaded"/>
+
+            <TextBlock Style="{StaticResource SubtitleStyle}">
+                Извлечение (удаление) максимального элемента
+            </TextBlock>
+
+            <TextBlock Style="{StaticResource DescriptionStyle}">
+                В упорядоченном max-heap максимальный элемент всегда хранится в корне. Восстановить упорядоченность двоичной кучи после удаления максимального элемента можно, поставив на его место последний элемент и вызвав heapify для корня, то есть упорядочив все дерево.
+            </TextBlock>
+
+            <avalon:TextEditor Name="MaxBHeapCodeEditor" SyntaxHighlighting="C#" 
+                   FontFamily="Cascadia Mono" FontSize="14" 
+                   IsReadOnly="True" VerticalScrollBarVisibility="Auto" 
+                   HorizontalScrollBarVisibility="Auto"
+                   Loaded="MaxBHeapCodeEditor_Loaded"/>
+
+            <TextBlock Style="{StaticResource SubtitleStyle}">
+                Сортировка с применением двоичной кучи
+            </TextBlock>
+
+            <TextBlock Style="{StaticResource DescriptionStyle}">
+                Заметим, что можно отсортировать массив, сначала построив из него двоичную кучу, а потом последовательно извлекая максимальные элементы. Оценим временную сложность такого элемента: построение кучи – O(N), извлечение N элементов – O(N log2 N). Следовательно, итоговая оценка O(N log2 N). При этом дополнительная память для массива не используется.
+            </TextBlock>
+
+            <avalon:TextEditor Name="SortBHeapCodeEditor" SyntaxHighlighting="C#" 
+                               FontFamily="Cascadia Mono" FontSize="14" 
+                               IsReadOnly="True" VerticalScrollBarVisibility="Auto" 
+                               HorizontalScrollBarVisibility="Auto"
+                               Loaded="SortBHeapCodeEditor_Loaded"/> 
+
+            <TextBlock Style="{StaticResource SubtitleStyle}">
+                Заключение
+            </TextBlock>
+
+            <TextBlock Style="{StaticResource DescriptionStyle}">
+                Таким образом, двоичная куча имеет структуру дерева логарифмической высоты (относительно количества вершин), позволяет за логарифмическое же время добавлять элементы и извлекать элемент с максимальным приоритетом за константное время. В то же время двоичная куча проста в реализации и не требует дополнительной памяти. 
+            </TextBlock>
+
+        </StackPanel>
+    </ScrollViewer>
+</Page>
