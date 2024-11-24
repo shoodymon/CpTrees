@@ -1,0 +1,74 @@
+﻿<Window x:Class="Tree_Structures.View.SettingsWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Tree_Structures.View"
+        xmlns:pixi="clr-namespace:ColorPicker;assembly=ColorPicker"
+        mc:Ignorable="d"
+        Title="SettingsWindow" Style="{StaticResource MainWindowStyle}"
+        WindowStartupLocation="CenterScreen" WindowStyle="None" ResizeMode="NoResize"
+        AllowsTransparency="True" Background="Transparent">
+    <Border Background="#1C1D31" CornerRadius="25">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <TextBlock Text="Н А С Т Р О Й К И" 
+                      Grid.Row="0"
+                      Grid.ColumnSpan="2"
+                      Margin="0,30,0,30" 
+                      HorizontalAlignment="Center" 
+                      Foreground="#CDD7E0" 
+                      FontFamily="Roboto" 
+                      FontSize="36"/>
+
+            <!-- Левая панель с кнопками -->
+            <StackPanel Grid.Row="1" Grid.Column="0"
+                        HorizontalAlignment="Center" 
+                        VerticalAlignment="Center">
+
+                <Button x:Name="TreeColorButton"
+                        Content="Цвет фона дерева"
+                        Width="200"
+                        Height="40"
+                        Style="{StaticResource GradientControlButtonStyle}"
+                        Click="TreeColorButton_Click"/>
+
+                <Button x:Name="TutorialsColorButton"
+                        Content="Цвет фона обучения"
+                        Width="200"
+                        Height="40"
+                        Style="{StaticResource GradientControlButtonStyle}"
+                        Click="TutorialsColorButton_Click"/>
+            </StackPanel>
+
+            <!-- Правая панель с ColorPicker'ами -->
+            <Grid Grid.Row="1" Grid.Column="1">
+                <pixi:StandardColorPicker x:Name="TreeColorPicker"
+                         ColorChanged="TreeColorPicker_ColorChanged"
+                         Width="500" Height="550" Visibility="Collapsed" 
+                         HorizontalAlignment="Center" VerticalAlignment="Center"/>
+
+                <pixi:StandardColorPicker x:Name="TutorialsColorPicker"
+                         ColorChanged="TutorialsColorPicker_ColorChanged"
+                         Width="500" Height="550" Visibility="Collapsed"
+                         HorizontalAlignment="Center" VerticalAlignment="Center"/>
+
+            </Grid>
+
+            <Button x:Name="BackButton" Content="Назад"
+                    Grid.Row="2" Grid.ColumnSpan="2"
+                    Margin="70,20,70,20"
+                    Style="{StaticResource GradientControlButtonStyle}"
+                    Click="BackButton_Click"/>
+        </Grid>
+    </Border>
+</Window>

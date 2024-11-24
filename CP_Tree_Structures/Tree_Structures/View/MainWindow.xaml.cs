@@ -14,6 +14,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Tree_Structures.View;
+using Tree_Structures.ViewModel;
 
 namespace Tree_Structures
 {
@@ -23,11 +24,15 @@ namespace Tree_Structures
     public partial class MainWindow : Window
     {
         private Window currentActiveWindow;
+        private Color _treeBackgroundColor;
+        private Color _tutorialsBackgroundColor;
 
         public MainWindow()
         {
             InitializeComponent();
             this.MouseDown += Window_MouseDown;
+            _treeBackgroundColor = WindowSettings.TreeBackgroundColor;
+            _tutorialsBackgroundColor = WindowSettings.TutorialsBackgroundColor;
         }
 
         private void Window_MouseDown(object sender, MouseButtonEventArgs e)
@@ -43,12 +48,10 @@ namespace Tree_Structures
         }
 
 
-        private void SettingsButton_Click(object sender, RoutedEventArgs e)
+        private async void SettingsButton_Click(object sender, RoutedEventArgs e)
         {
-            // Когда будет реализовано окно настроек:
-            // var settingsWindow = new SettingsWindow();
-            // SwitchToNewWindow(settingsWindow);
-            MessageBox.Show("Settings window will be implemented later.");
+            var settingsWindow = new SettingsWindow();
+            await App.WindowManager.SwitchToWindowAsync(settingsWindow);
         }
 
         private async void TutorialsButton_Click(object sender, RoutedEventArgs e)

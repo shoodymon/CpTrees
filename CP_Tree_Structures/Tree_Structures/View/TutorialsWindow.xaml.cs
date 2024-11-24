@@ -33,6 +33,7 @@ namespace Tree_Structures.View
         public TutorialsWindow()
         {
             InitializeComponent();
+            WindowSettings.TutorialsWindow = this;
 
             // Создаем и инициализируем коллекцию страниц
             _treePages = new Dictionary<TreeType, Page>
@@ -66,6 +67,11 @@ namespace Tree_Structures.View
             {
                 TutorialFrame.Navigate(_treePages[selectedTreeTypeItem.TreeType]);
             }
+        }
+
+        private async void BackButton_Click(object sender, RoutedEventArgs e)
+        {
+            await App.WindowManager.SwitchToWindowAsync(App.WindowManager.MainWindow);
         }
     }
 }

@@ -23,7 +23,7 @@
                     <ColumnDefinition Width="300" />
                 </Grid.ColumnDefinitions>
 
-                <Border Background="{DynamicResource CanvasBackgroundBrush}" CornerRadius="25" Margin="20,30,10,20" BorderThickness="2" BorderBrush="#FFFF0900">
+                <Border Background="{DynamicResource TreeCanvasBackgroundBrush}" CornerRadius="25" Margin="20,30,10,20" BorderThickness="2" BorderBrush="#FFFF0900">
                     <Canvas x:Name="TreeCanvas" Background="Transparent"/>
                 </Border>
 

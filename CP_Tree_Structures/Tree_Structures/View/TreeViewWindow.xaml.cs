@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using Tree_Structures.Model;
+using Tree_Structures.ViewModel;
 
 namespace Tree_Structures.View
 {
@@ -27,6 +28,8 @@ namespace Tree_Structures.View
         public TreeViewWindow()
         {
             InitializeComponent();
+            WindowSettings.TreeWindow = this;
+
             trees = new Dictionary<string, ITree>()
             {
                 { "Бинарное дерево поиска", new BinarySearchTree() },

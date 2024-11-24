@@ -374,6 +374,9 @@
     <!-- Цвет фона для холста -->
     <SolidColorBrush x:Key="CanvasBackgroundBrush" Color="Cornsilk" />
 
+    <SolidColorBrush x:Key="TreeCanvasBackgroundBrush" Color="{x:Static Colors.Cornsilk}"/>
+    <SolidColorBrush x:Key="TutorialsCanvasBackgroundBrush" Color="{x:Static Colors.Cornsilk}"/>
+
     <!-- Цвета для стрелок и обводок -->
     <SolidColorBrush x:Key="EllipseColorBrush" Color="Black" />
     <SolidColorBrush x:Key="ArrowColorBrush" Color="#1c1c1c" />

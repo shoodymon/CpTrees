@@ -16,7 +16,7 @@
             </Grid.ColumnDefinitions>
 
             <!-- Frame для отображения выбранной страницы -->
-            <Border Background="{DynamicResource CanvasBackgroundBrush}" CornerRadius="25" Margin="20,30,10,20" BorderThickness="2" BorderBrush="#FFFF0900">
+            <Border Background="{DynamicResource TutorialsCanvasBackgroundBrush}" CornerRadius="25" Margin="20,30,10,20" BorderThickness="2" BorderBrush="#FFFF0900">
                 <Frame x:Name="TutorialFrame" NavigationUIVisibility="Hidden" Margin="10" />
             </Border>
 
@@ -24,6 +24,7 @@
             <Grid Grid.Column="1" Margin="20">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
                     <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
 
@@ -43,6 +44,11 @@
                                    Padding="20" TextWrapping="Wrap" />
                     </ScrollViewer>
                 </Border>
+
+                <Button x:Name="BackButton" Content="Назад" 
+                        Grid.Row="2" Margin="70,20,70,270"
+                        Style="{StaticResource GradientControlButtonStyle}"
+                        Click="BackButton_Click"/>
             </Grid>
         </Grid>
     </Border>

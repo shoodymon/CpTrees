@@ -19,6 +19,7 @@ namespace Tree_Structures
         protected override async void OnStartup(StartupEventArgs e)
         {
             base.OnStartup(e);
+            WindowSettings.InitializeResources();
 
             // Инициализируем WindowManager с единственным экземпляром MainWindow
             var mainWindow = new MainWindow();
