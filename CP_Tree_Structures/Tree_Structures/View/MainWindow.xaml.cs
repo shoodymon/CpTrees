@@ -60,12 +60,10 @@ namespace Tree_Structures
             await App.WindowManager.SwitchToWindowAsync(tutorialsWindow);
         }
 
-        private void AuthorButton_Click(object sender, RoutedEventArgs e)
+        private async void AuthorButton_Click(object sender, RoutedEventArgs e)
         {
-            // Когда будет реализовано окно автора:
-            // var authorWindow = new AuthorWindow();
-            // SwitchToNewWindow(authorWindow);
-            MessageBox.Show("Author window will be implemented later.");
+            var authorWindow = new AuthorWindow();
+            await App.WindowManager.SwitchToWindowAsync(authorWindow);
         }
 
         private void ExitBtn_Click(object sender, RoutedEventArgs e)

@@ -79,6 +79,9 @@
     <Compile Include="ViewModel\TreeManager.cs" />
     <Compile Include="ViewModel\WindowManager.cs" />
     <Compile Include="ViewModel\WindowSettings.cs" />
+    <Compile Include="View\AuthorWindow.xaml.cs">
+      <DependentUpon>AuthorWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\BTreeDrawer.cs" />
     <Compile Include="View\Pages\AVLTreePage.xaml.cs">
       <DependentUpon>AVLTreePage.xaml</DependentUpon>
@@ -107,6 +110,10 @@
       <DependentUpon>TutorialsWindow.xaml</DependentUpon>
     </Compile>
     <Page Include="View\AppStyles.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\AuthorWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
