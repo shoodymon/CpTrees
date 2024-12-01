@@ -83,6 +83,9 @@
       <DependentUpon>AuthorWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\BTreeDrawer.cs" />
+    <Compile Include="View\Notifications\ErrorNotification.xaml.cs">
+      <DependentUpon>ErrorNotification.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\Pages\AVLTreePage.xaml.cs">
       <DependentUpon>AVLTreePage.xaml</DependentUpon>
     </Compile>
@@ -101,6 +104,9 @@
     <Compile Include="View\SettingsWindow.xaml.cs">
       <DependentUpon>SettingsWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\Notifications\SuccessNotification.xaml.cs">
+      <DependentUpon>SuccessNotification.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\TreeDrawer.cs" />
     <Compile Include="View\TreeView.cs" />
     <Compile Include="View\TreeViewWindow.xaml.cs">
@@ -114,6 +120,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\AuthorWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Notifications\ErrorNotification.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -154,6 +164,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\SettingsWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Notifications\SuccessNotification.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

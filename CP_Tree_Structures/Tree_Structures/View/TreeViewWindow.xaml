@@ -68,8 +68,8 @@
                     <Button x:Name="SearchNodeButton" Content="Найти" Grid.Row="3" Grid.Column="0" Style="{StaticResource GradientControlButtonStyle}" />
                     <Button x:Name="BackButton" Content="Назад" Grid.Row="3" Grid.Column="1" Style="{StaticResource GradientControlButtonStyle}" />
                 </Grid>
+                <Canvas x:Name="NotificationCanvas" Margin="20,220,20,220" Width="300" />
             </Grid>
-
         </Grid>
     </Border>
 </Window>

@@ -9,8 +9,10 @@ using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.Windows.Threading;
 using Tree_Structures.Model;
 using Tree_Structures.ViewModel;
 
@@ -73,6 +75,46 @@ namespace Tree_Structures.View
             await App.WindowManager.SwitchToWindowAsync(App.WindowManager.MainWindow);
         }
 
+        private void ShowErrorNotification(string message)
+        {
+            var notification = new ErrorNotification();
+            notification.SetMessage(message);
+
+            NotificationCanvas.Children.Add(notification);
+            Canvas.SetTop(notification, NotificationCanvas.Children.Count * 50);
+
+            var fadeOut = new DoubleAnimation
+            {
+                From = 1.0,
+                To = 0.0,
+                Duration = TimeSpan.FromSeconds(1),
+                BeginTime = TimeSpan.FromSeconds(4) // Ждем перед исчезновением
+            };
+
+            fadeOut.Completed += (s, e) => NotificationCanvas.Children.Remove(notification);
+            notification.BeginAnimation(UIElement.OpacityProperty, fadeOut);
+        }
+
+        private void ShowSuccessNotification(string message)
+        {
+            var notification = new SuccessNotification();
+            notification.SetMessage(message);
+
+            NotificationCanvas.Children.Add(notification);
+            Canvas.SetTop(notification, NotificationCanvas.Children.Count * 50);
+
+            var fadeOut = new DoubleAnimation
+            {
+                From = 1.0,
+                To = 0.0,
+                Duration = TimeSpan.FromSeconds(1),
+                BeginTime = TimeSpan.FromSeconds(4) // Ждем перед исчезновением
+            };
+
+            fadeOut.Completed += (s, e) => NotificationCanvas.Children.Remove(notification);
+            notification.BeginAnimation(UIElement.OpacityProperty, fadeOut);
+        }
+
         private void AddNodeButton_Click(object sender, RoutedEventArgs e)
         {
             if (int.TryParse(ValueTextBox.Text, out int value))
@@ -87,12 +129,12 @@ namespace Tree_Structures.View
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show($"Ошибка при добавлении узла: {ex.Message}");
+                    ShowErrorNotification($"Ошибка при добавлении узла: {ex.Message}");
                 }
             }
             else
             {
-                MessageBox.Show("Пожалуйста, введите корректное числовое значение");
+                ShowErrorNotification("Пожалуйста, введите корректное числовое значение");
             }
         }
 
@@ -110,12 +152,12 @@ namespace Tree_Structures.View
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show($"Ошибка при удалении узла: {ex.Message}");
+                    ShowErrorNotification($"Ошибка при удалении узла: {ex.Message}");
                 }
             }
             else
             {
-                MessageBox.Show("Пожалуйста, введите корректное числовое значение");
+                ShowErrorNotification("Пожалуйста, введите корректное числовое значение");
             }
         }
 
@@ -137,7 +179,7 @@ namespace Tree_Structures.View
                             treeDrawer.SetHighlightedNode(value);
                         }
                         RedrawTree();
-                        MessageBox.Show($"Значение {value} найдено в дереве");
+                        ShowSuccessNotification($"Значение {value} найдено в дереве");
                     }
                     else
                     {
@@ -150,17 +192,17 @@ namespace Tree_Structures.View
                             treeDrawer.SetHighlightedNode(null);
                         }
                         RedrawTree();
-                        MessageBox.Show($"Значение {value} не найдено в дереве");
+                        ShowErrorNotification($"Значение {value} не найдено в дереве");
                     }
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show($"Ошибка при поиске узла: {ex.Message}");
+                    ShowErrorNotification($"Ошибка при поиске узла: {ex.Message}");
                 }
             }
             else
             {
-                MessageBox.Show("Пожалуйста, введите корректное числовое значение");
+                ShowErrorNotification("Пожалуйста, введите корректное числовое значение");
             }
         }
 
